@@ -13,3 +13,4 @@ Ha-ha classic. [Game of life](http://bit.ly/2DHNVKo)
 + To run press "R"
 + To stop press "S"
 + To refresh press "F"
++ To add cell press Left Mouse Button, to remove cell press Right Mpuse Button
