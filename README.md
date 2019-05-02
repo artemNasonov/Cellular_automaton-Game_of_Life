@@ -1,5 +1,5 @@
-# Cellular_automaton-Game_of_Life
-Ha-ha classic
+# Cellular automaton - Game of Life
+Ha-ha classic. [Game of life](http://bit.ly/2DHNVKo)
 # How to install and play
 ## First way (Preferred)
 1. Download ```.jar```-file last version [from here](https://github.com/artemNasonov/Cellular_automaton-Game_of_Life/blob/master/out/artifacts/Cellular_automaton_jar/Cellular_automaton.jar)
