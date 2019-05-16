@@ -43,12 +43,9 @@ public class CellularAutomaton {
 
             }
         });
-        Timer timer = new Timer(100, new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                world.refresh();
-                frame.repaint();
-            }
+        Timer timer = new Timer(100, e -> {
+            world.refresh();
+            frame.repaint();
         });
         frame.addKeyListener(new KeyAdapter() {
             @Override
@@ -59,15 +56,20 @@ public class CellularAutomaton {
             @Override
             public void keyPressed(KeyEvent e) {
                 String pressedButton = KeyEvent.getKeyText(e.getKeyCode());
-                if(pressedButton.equals("R")){
-                     timer.start();
-                } else if(pressedButton.equals("S")){
-                     timer.stop();
-                } else if(pressedButton.equals("E")){
-                     editing = true;
-                } else if(pressedButton.equals("F")){
-                    world.refresh();
-                    frame.repaint();
+                switch (pressedButton) {
+                    case "R":
+                        timer.start();
+                        break;
+                    case "S":
+                        timer.stop();
+                        break;
+                    case "E":
+                        editing = true;
+                        break;
+                    case "F":
+                        world.refresh();
+                        frame.repaint();
+                        break;
                 }
             }
 

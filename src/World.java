@@ -3,6 +3,7 @@ import java.awt.*;
 
 public class World extends JPanel {
     private Cell[][] cells = new Cell[50][50];
+    private Cell[][] newCell = new Cell[50][50];
 
     World(){
         for(int y=0; y<50; y++){
@@ -17,9 +18,34 @@ public class World extends JPanel {
     }
 
     void refresh(){
-        Cell[][] newCell = new Cell[50][50];
+
+        Thread thread0 = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                ref(false);
+            }
+        });
+        Thread thread1 = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                ref(true);
+            }
+        });
+        thread0.start();
+        thread1.start();
+        try {
+            thread0.join();
+            thread1.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        for (int i=0; i<50; i++) System.arraycopy(newCell[i], 0, cells[i], 0, 50);
+    }
+
+    private void ref(boolean a){
         for(int y=0; y<50; ++y){
-            for(int x=0; x<50; ++x){
+            for(int x=!a?0:25; x<(!a?25:50); ++x){
                 newCell[x][y] = new Cell(x, y);
                 newCell[x][y].setAlive(cells[x][y].isAlive());
                 int al = searchForAliveCells(x, y);
@@ -32,7 +58,6 @@ public class World extends JPanel {
                 }
             }
         }
-        for (int i=0; i<50; i++) System.arraycopy(newCell[i], 0, cells[i], 0, 50);
     }
 
     private int searchForAliveCells(int x, int y){
